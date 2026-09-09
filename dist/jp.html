@@ -11,7 +11,10 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     .hero { display: block; }
-    .hero-logo-placeholder { font-size: clamp(44px, 8vw, 128px); line-height: .9; letter-spacing: -.09em; white-space: nowrap; margin-bottom: 34px; }
+    .hero-logo-placeholder, .hero-tagline { font-size: clamp(38px, 5vw, 84px); line-height: .95; letter-spacing: -.09em; white-space: nowrap; }
+    .hero-logo-placeholder { margin-bottom: 18px; }
+    .hero-tagline { margin-bottom: 16px; }
+    .hero-descriptor { font-size: clamp(16px, 2vw, 28px); line-height: 1.1; letter-spacing: -.03em; margin-bottom: 82px; }
     .hero-topline { font-family: 'DM Mono', monospace; font-size: clamp(10px, 3.1vw, 52px); line-height: 1; letter-spacing: -.055em; white-space: nowrap; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 82px; }
     .hero-copy { max-width: 1280px; }
     .hero-copy .logo-card { display: none; }
@@ -20,7 +23,10 @@
     .ja-page .hero h1 { white-space: normal; }
     @media (max-width: 800px) {
       .hero { padding-top: 60px; }
-      .hero-logo-placeholder { font-size: clamp(42px, 14vw, 76px); margin-bottom: 28px; }
+      .hero-logo-placeholder, .hero-tagline { font-size: clamp(24px, 7vw, 52px); }
+      .hero-logo-placeholder { margin-bottom: 12px; }
+      .hero-tagline { margin-bottom: 12px; }
+      .hero-descriptor { font-size: 16px; margin-bottom: 58px; }
       .hero-topline { font-size: clamp(10px, 3.1vw, 25px); margin-bottom: 58px; }
       .hero h1 { font-size: clamp(31px, 9.5vw, 72px); }
       .intro-break { display: inline; }
@@ -33,7 +39,8 @@
   <main id="top">
     <section class="hero section-pad">
       <div class="hero-logo-placeholder">dot <span class="red">.</span> wave</div>
-      <div class="hero-topline">Indonesia ↔ Japan · Local Insight. Global Motion.</div>
+      <div class="hero-tagline">Local Insight. Global Motion.</div>
+      <div class="hero-descriptor">クリエイティブ・コンサルティング・コレクティブ</div>
       <div class="hero-copy reveal"><h1>アイデア <span class="red">+</span> 人<span class="red">。</span><br>無限の可能性<span class="red">。</span></h1><p class="hero-lede">インドネシア進出を考える日本企業のために、現地の洞察とネットワークをもとに、戦略から実行まで伴走します。</p><a class="button" href="#how">進め方を見る <span>↓</span></a></div>
       <div class="hero-foot"><span>01 — はじまりの点</span><span>一つひとつの課題に、独自の視点を。</span></div>
     </section>
