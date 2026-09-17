@@ -18,3 +18,5 @@
 }
 .ja-page :is(h1,h2,h3){text-wrap:balance}
 .ja-page :is(p,a,button,strong,small,.section-tag,.hero-foot,.method-intro,.contact-copy,.closing-line){text-wrap:pretty}
+
+.portrait-arno img{object-position:center 62%}
