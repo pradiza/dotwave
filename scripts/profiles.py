@@ -36,9 +36,11 @@ def build(lang):
   portrait=not p.exists()
   if portrait:p=ROOT/'dist/assets/optimized'/name
   im=Image.open(p);iw,ih=im.size
-  scale=max(w/iw,h/ih);nw,nh=iw*scale,ih*scale
+  scale=(min if portrait else max)(w/iw,h/ih);nw,nh=iw*scale,ih*scale
+  if portrait:
+   c.setFillColor(HexColor(SOFT));c.rect(x,H-y-h,w,h,fill=1,stroke=0)
   c.saveState();q=c.beginPath();q.rect(x,H-y-h,w,h);c.clipPath(q,stroke=0)
-  c.drawImage(str(p),x-(nw-w)/2,H-y-h-(nh-h)*(0.92 if portrait else 0.5),width=nw,height=nh);c.restoreState()
+  c.drawImage(str(p),x-(nw-w)/2,H-y-h-(nh-h)/2,width=nw,height=nh);c.restoreState()
  page('COMPANY PROFILE / ENGLISH' if lang=='en' else '会社案内 / 日本語')
  txt('Indonesia\n↔ Japan',44,96,690,62,INK,True)
  txt('Ideas + People. Infinite Possibilities.',48,295,700,22)

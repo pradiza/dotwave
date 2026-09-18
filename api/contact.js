@@ -43,12 +43,23 @@ export function createHandler({env=process.env,send=fetch}={}) {
     if(!data)return respond(req,res,400,false);
     if(data.spam)return respond(req,res,200,true,data.language);
     // Fail closed: never claim receipt before the configured delivery provider accepts it.
-    if(!env.RESEND_API_KEY || !env.CONTACT_FROM)return respond(req,res,503,false,data.language);
+    const formspreeId=env.FORMSPREE_FORM_ID;
+    if(formspreeId && !/^[a-zA-Z0-9]+$/.test(formspreeId))return respond(req,res,503,false,data.language);
+    if(!formspreeId && (!env.RESEND_API_KEY || !env.CONTACT_FROM))return respond(req,res,503,false,data.language);
     const {website,spam,...safe}=data;
     const body=Object.entries(safe).map(([k,v])=>`${k}: ${v}`).join('\n\n');
     // Provider-level idempotency prevents duplicate sends on retries within a day.
     const key=createHash('sha256').update(JSON.stringify(safe)+new Date().toISOString().slice(0,10)).digest('hex');
     try {
+      if(formspreeId){
+        const result=await send('https://formspree.io/f/'+formspreeId,{
+          method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+          body:JSON.stringify({...safe,_subject:'dot.wave — Project inquiry'}),
+          signal:AbortSignal.timeout(12000)
+        });
+        const accepted=result.ok && (await result.json()).ok===true;
+        return respond(req,res,accepted?200:502,accepted,data.language);
+      }
       const result=await send('https://api.resend.com/emails',{
         method:'POST',headers:{Authorization:`Bearer ${env.RESEND_API_KEY}`,'Content-Type':'application/json','Idempotency-Key':key},
         body:JSON.stringify({from:env.CONTACT_FROM,to:[recipient],reply_to:data.email,subject:'dot.wave — Project inquiry',text:body}),

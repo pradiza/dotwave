@@ -38,9 +38,11 @@ Verified on 18 September 2026 in the Vercel dashboard:
 
 ## Contact delivery: launch gate
 
-The old site had only email links. The new `api/contact.js` sends inquiries to the fixed recipient `dotwave.creative@gmail.com` through Resend. Set `RESEND_API_KEY` and `CONTACT_FROM` (a verified sender) in Vercel for Preview and Production. Never place secrets in browser code or commit them.
+The old site had only email links. The new `api/contact.js` supports Formspree delivery to the Gmail inbox. Create and verify a Formspree account for `dotwave.creative@gmail.com`, create the dot.wave enquiries form, and set its ID as `FORMSPREE_FORM_ID` in Vercel for Preview and Production. Confirm the recipient and spam settings in Formspree, then test a real submission before launch. Formspree stores submissions according to the account plan and settings.
 
-The form returns an explicit failure until delivery is configured, preserving entered data and offering direct email. It never reports success before provider acceptance. Server validation, origin checking, honeypot and provider idempotency are included. Mailbox correspondence is the inquiry record; no separate database is claimed. Apply appropriate Vercel firewall/rate limiting for the public endpoint before launch. Verify one real delivery and reply-to before production.
+Resend remains an alternative when no Formspree ID is set: configure `RESEND_API_KEY` and `CONTACT_FROM` (a verified sender). Never place secrets in browser code or commit them.
+
+The form returns an explicit failure until delivery is configured, preserving entered data and offering direct email. It never reports success before provider acceptance. Server validation, origin checking and a honeypot are included; the Resend path also uses provider idempotency. Verify real delivery and reply-to before production.
 
 ## Analytics
 
