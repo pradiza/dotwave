@@ -32,7 +32,7 @@ Verified on 18 September 2026 in the Vercel dashboard:
 - Previous production: `c5aef109b02868d2d47042fc7311d97c17373ab0`, deployment `BhPBETCq4p8zee45DmHS7ebFEzWT`.
 - Framework: Other. Root directory: repository root. Output: `dist`. Runtime: Node 24.
 - The live homepage matched the original repository HTML byte-for-byte.
-- A second Vercel project, `dotwave-collective`, also uses this repository. Verify its effect before merging changes to main.
+- The separate `dotwave-collective` project is preserved on production branch `preserved/dotwave-collective` at `c5aef109b02868d2d47042fc7311d97c17373ab0`, per the owner's request. Keep that branch unchanged when releasing dotwave.
 
 `vercel.json` preserves the output directory and adds the build command, clean URLs, old `/jp.html` redirect and response headers. Non-production branches should be verified through Vercel previews before merging. Do not alter the separate `dot-wave` or Rinintha portfolio projects.
 
