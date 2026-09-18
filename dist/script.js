@@ -1,23 +1,70 @@
-const profiles={
- rini:{name:'rini.wave',role:'Integrated marketing, creative strategy, research, special projects and Indonesia–Japan work.',bio:'Rinintha is a senior strategist, producer and Indonesia–Japan specialist with 15+ years across hospitality, entertainment, media, fashion, government cooperation and cultural projects. Her experience includes Holywings Group, Nila Baharuddin, Japanese Station, JKT48, JICA, Japan Wave Expo and Hyper Wave Festival. She connects market insight, creative direction and hands-on delivery.',links:[['View rinintha.com ↗','https://rinintha.com/']]},
- faza:{name:'faza.wave',role:'Character IP, storytelling, creative worlds and audience-facing collaboration.',bio:'Faza Meonk is the creator of Si Juki and the founder of PIONICON IP Management. Since 2010, Si Juki has grown from an online comic into books, Webtoon, animation, games, film and brand collaborations. The character has more than 65 best-selling printed titles, an animated feature, a Disney+ series and collaborations with more than 100 brands.',links:[['Visit Si Juki ↗','https://www.sijuki.com/']]},
- arno:{name:'arno.wave',role:'Innovation consulting, research, brand development, campaign activation and account management.',bio:'Arno is a strategic brand marketer with 7+ years across innovation consulting, F&B, lifestyle, spirits, technology and consumer brands. He has worked with Innovesia, Cheil Worldwide, Samsung Indonesia and Holywings Creative, co-facilitated 50+ innovation workshops and managed 30+ brand partnerships. He also knows all 1,025 Pokémon by heart.',links:[]},
- resky:{name:'resky.wave',role:'Photography, visual storytelling, fashion, music, content, social media and KOL strategy.',bio:'Resky is a photographer, creative producer and social media specialist with 10+ years of experience. His work includes JKT48 and Dentsu Indonesia, Japanese Station, Parallax Network, the Museum of Crypto Art, and clients including Garuda Indonesia, Konami, Onitsuka Tiger, Shiseido, Pocky, Nissin and The Japan Foundation. He has produced photobooks, documentaries, campaigns and visual stories across music, fashion and lifestyle.',links:[['View the1993.co ↗','https://www.the1993.co/'],['Lomography feature ↗','https://www.lomography.com/magazine/356387-the-1993-first-impression-with-lomography-35mm-film']]},
- andhika:{name:'andhika.wave',role:'Japan relations, cultural strategy, investment, corporate matchmaking, media and fan ecosystems.',bio:'Andhika is a cross-border cultural strategist based in Yokohama. As an Investment Promotion Officer at IIPC Tokyo, he works with C-suite executives, government stakeholders and corporate investors on FDI, business matching and economic bridges between Japan and Indonesia. His background also spans Tech Mahindra Japan, quality assurance, financial analysis, international sports-media operations and 15+ years immersed in Japanese creative industries and fan ecosystems.',links:[]}
-};
-const japaneseProfiles={
- rini:{name:'rini.wave',role:'マーケティング戦略、クリエイティブ戦略、リサーチ、プロジェクト推進、日・インドネシア間の協業。',bio:'Rininthaは、ホスピタリティ、エンターテインメント、メディア、ファッション、政府間協力、文化プロジェクトの分野で15年以上の経験を持つストラテジスト／プロデューサーです。市場理解とクリエイティブ、実行をつなぎ、日本企業やブランドのインドネシアでの展開を支援します。',links:[['rinintha.comを見る ↗','https://rinintha.com/']]},
- faza:{name:'faza.wave',role:'キャラクターIP、ストーリーテリング、クリエイティブ開発、ファンとの接点づくり。',bio:'Faza Meonkは、キャラクター「Si Juki」の生みの親であり、PIONICON IP Managementの創設者です。2010年から、Si Jukiをオンラインコミックから書籍、Webtoon、アニメーション、ゲーム、映画、ブランド協業へと展開してきました。',links:[['Si Juki公式サイト ↗','https://www.sijuki.com/']]},
- arno:{name:'arno.wave',role:'イノベーション・コンサルティング、リサーチ、ブランド開発、キャンペーン、アカウントマネジメント。',bio:'Arnoは、イノベーションコンサルティング、F&B、ライフスタイル、スピリッツ、テクノロジー、消費者向けブランドにまたがるブランドマーケターです。50以上のイノベーションワークショップを共同で進行し、30以上のブランドパートナーシップを担当してきました。',links:[]},
- resky:{name:'resky.wave',role:'写真、ビジュアルストーリーテリング、ファッション、音楽、コンテンツ、SNS・KOL戦略。',bio:'Reskyは、10年以上の経験を持つフォトグラファー、クリエイティブプロデューサー、ソーシャルメディアスペシャリストです。音楽、ファッション、ライフスタイルを中心に、日本とインドネシアをまたぐビジュアル制作やブランドコミュニケーションを手がけています。',links:[['the1993.coを見る ↗','https://www.the1993.co/'],['Lomography掲載記事 ↗','https://www.lomography.com/magazine/356387-the-1993-first-impression-with-lomography-35mm-film']]},
- andhika:{name:'andhika.wave',role:'日本・インドネシア間の事業開発、文化戦略、投資、企業連携、メディア・ファンコミュニティ。',bio:'Andhikaは横浜を拠点とするクロスボーダー・カルチュラルストラテジストです。IIPC Tokyoの投資促進担当として、日本企業、政府関係者、投資家とともに、インドネシアへの投資、ビジネスマッチング、長期的な関係づくりに取り組んでいます。',links:[]}
-};
-const activeProfiles=document.documentElement.lang==='ja'?japaneseProfiles:profiles;
-const buttons=[...document.querySelectorAll('.member-card')],dialog=document.querySelector('#member-dialog'),nameEl=document.querySelector('#profile-name'),roleEl=document.querySelector('#profile-role'),bioEl=document.querySelector('#profile-bio'),indexEl=document.querySelector('.profile-index'),linksEl=document.querySelector('#profile-links');
-function renderLinks(links){linksEl.innerHTML=links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noreferrer">${label}</a>`).join('');}
-buttons.forEach((button,i)=>button.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));button.classList.add('active');const p=activeProfiles[button.dataset.member];nameEl.textContent=p.name;roleEl.textContent=p.role;bioEl.textContent=p.bio;indexEl.textContent=`0${i+1} / 05`;renderLinks(p.links);if(typeof dialog.showModal==='function')dialog.showModal()}));
-dialog.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
-const menuToggle=document.querySelector('.menu-toggle'),mobileMenu=document.querySelector('#mobile-menu');
-if(menuToggle&&mobileMenu){const closeMenu=()=>{menuToggle.setAttribute('aria-expanded','false');mobileMenu.classList.remove('is-open')};menuToggle.addEventListener('click',()=>{const open=menuToggle.getAttribute('aria-expanded')==='true';menuToggle.setAttribute('aria-expanded',String(!open));mobileMenu.classList.toggle('is-open',!open)});mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()})}
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+(() => {
+  const ja = document.documentElement.lang === 'ja';
+  // Only low-cardinality, non-personal event properties enter analytics.
+  window.va = window.va || function (...args) { (window.vaq = window.vaq || []).push(args); };
+  window.si = window.si || function (...args) { (window.siq = window.siq || []).push(args); };
+  const track = (name, data = {}) => {
+    if (document.documentElement.dataset.eventsEnabled === 'true') window.va('event', { name, data: { language: ja ? 'ja' : 'en', ...data } });
+  };
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('#mobile-menu');
+  function closeMenu(returnFocus = false) {
+    if (!toggle || !menu) return;
+    menu.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', ja ? 'メニューを開く' : 'Open menu');
+    if (returnFocus) toggle.focus();
+  }
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    menu.hidden = !open; toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? (ja ? 'メニューを閉じる' : 'Close menu') : (ja ? 'メニューを開く' : 'Open menu'));
+  });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !menu?.hidden) closeMenu(true); });
+  document.addEventListener('click', event => { if (!event.target.closest('.nav')) closeMenu(); });
+  menu?.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
+  matchMedia('(min-width: 901px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+  document.querySelectorAll('[data-event]').forEach(link => link.addEventListener('click', () => {
+    const data = {};
+    for (const key of ['project','member','language']) if (link.dataset[key]) data[key] = link.dataset[key];
+    track(link.dataset.event, data);
+  }));
+  document.querySelectorAll('.languages a').forEach(link => link.addEventListener('click', () => track('Language Changed', { to: link.lang })));
+  const filters = document.querySelector('.filters');
+  const cards = [...document.querySelectorAll('[data-categories]')];
+  if (filters) {
+    filters.hidden = false;
+    const count = document.querySelector('.filter-count');
+    const filter = value => {
+      let shown = 0;
+      cards.forEach(card => { card.hidden = value !== 'all' && !card.dataset.categories.split(' ').includes(value); if (!card.hidden) shown++; });
+      filters.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
+      count.textContent = ja ? `${shown}件の実績` : `${shown} selected projects`;
+    };
+    filters.addEventListener('click', event => { const button = event.target.closest('[data-filter]'); if (button) filter(button.dataset.filter); });
+    filter('all');
+  }
+  const form = document.querySelector('#contact-form');
+  if (form) {
+    let started = false;
+    form.addEventListener('input', () => { if (!started) { started = true; track('Contact Started'); } });
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const button = form.querySelector('[type="submit"]');
+      const status = document.querySelector('#form-status');
+      const old = button.textContent;
+      button.disabled = true; form.setAttribute('aria-busy','true');
+      status.textContent = ja ? '送信しています…' : 'Sending your inquiry…'; status.dataset.state = 'pending';
+      const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 20000);
+      try {
+        const response = await fetch('/api/contact', { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify(Object.fromEntries(new FormData(form))), signal:controller.signal });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error('delivery');
+        status.textContent = ja ? 'お問い合わせを受け付けました。内容を確認し、ご記入のメールアドレスへご連絡します。' : 'Thank you. We’ve received your project inquiry. We’ll review the context you shared and get back to you at the email provided.';
+        status.dataset.state = 'success'; track('Contact Submitted'); form.reset(); started = false;
+      } catch {
+        status.textContent = ja ? '送信を確認できませんでした。入力内容は残っています。再度お試しいただくか、dotwave.creative@gmail.comへ直接ご連絡ください。' : 'We couldn’t confirm delivery. Your details are still here. Please try again or email dotwave.creative@gmail.com directly.';
+        status.dataset.state = 'error';
+      } finally { clearTimeout(timeout); button.disabled = false; button.textContent = old; form.removeAttribute('aria-busy'); status.focus(); }
+    });
+  }
+})();
